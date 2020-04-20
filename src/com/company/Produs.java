@@ -1,15 +1,12 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.lang.Math;
-
 public class Produs implements Comparable<Produs> {
     private String Nume;
     private double Pret;
     private int Cantitate = 1;
+    public Produs(){
+
+    }
 
     public Produs(String Nume, double Pret) {
         this.Nume = Nume;
@@ -23,6 +20,8 @@ public class Produs implements Comparable<Produs> {
     double GetPret() {
         return this.Pret;
     }
+
+    public void SetNume(String Nume){this.Nume=Nume;}
 
     public void SetCantitate(int Cantitate) {
         this.Cantitate = Cantitate;

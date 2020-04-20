@@ -1,9 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.*;
 
 //Caserie magazin cu baza de date.
 //Primele 6 comenzi sunt pentru administrator, daca doreste sa aduca produse noi in magazin, sa verifice bonurile, sa caute etc
@@ -11,6 +8,9 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+        String fileName="src/com/baza_date/Produs.csv";
+        Citire citire=new Citire();
+        citire.Reader(fileName);
         int choice;
         boolean check;
         Servicii Service = new Servicii();
