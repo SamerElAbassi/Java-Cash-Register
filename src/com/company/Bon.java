@@ -15,7 +15,7 @@ public class Bon {
     Bon() {
     }
 
-    Bon(double Pret, MetodaPlata MetodaPlata, int Cantinate) {
+    Bon(double Pret, MetodaPlata MetodaPlata) {
         this.Pret = Pret;
         this.MetodaPlata = MetodaPlata;
         this.Data = Data;

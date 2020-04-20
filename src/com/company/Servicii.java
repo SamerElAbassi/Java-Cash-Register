@@ -212,7 +212,6 @@ public class Servicii {
                         element.SetCantitate(cantitate);
                         BonParticular.Add(element);
                     }
-                ;
 
 
             }
@@ -300,8 +299,7 @@ public class Servicii {
             String CNP = in.nextLine();
             if (CNP.length() != 12)
                 throw new InvalidDataException("CNP-ul nu are 13 cifre!");
-            TicheteMasa Plata = new TicheteMasa(BonParticular.GetPret(), Nume, CNP);
-            BonParticular.MetodaPlata = Plata;
+            BonParticular.MetodaPlata = new TicheteMasa(BonParticular.GetPret(), Nume, CNP);
 
             System.out.println("\nAchitat! Se elibereaza cosul!\n");
             Bonuri.add(BonParticular);
