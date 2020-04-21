@@ -1,19 +1,19 @@
 package com.company;
 
-import java.util.Scanner;
-
 //Caserie magazin cu baza de date.
 //Primele 6 comenzi sunt pentru administrator, daca doreste sa aduca produse noi in magazin, sa verifice bonurile, sa caute etc
 //De la 7-12 sunt pentru client
 public class Main {
 
     public static void main(String[] args) {
-        String fileName="src/com/baza_date/Produs.csv";
-        Citire citire=new Citire();
-        citire.Reader(fileName);
         int choice;
         boolean check;
+
+
         Servicii Service = new Servicii();
+        Service.Citiri();
+        Service.Scrieri();
+        /*
         System.out.println("---------------LISTA DE PRODUSE IN MAGAZIN--------------\n----------Lista Legume/Fructe din taraba---------\n");
         Service.ShowHashFruitLegume();
         System.out.println("---------------LISTA NON-LEGUME-FRUCTE-------------\n");
@@ -108,7 +108,7 @@ public class Main {
             }
         }
 
-
+       */
     }
 
 

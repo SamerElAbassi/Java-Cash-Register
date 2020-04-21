@@ -1,13 +1,10 @@
 package com.company;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class MetodaPlata {
     private double Pret;
     private String CNP;
     private String Nume;
+    MetodaPlata(){}
 
     void SetName(String Nume) {
         this.Nume = Nume;
@@ -23,6 +20,11 @@ public class MetodaPlata {
 
     public String GetName() {
         return this.Nume;
+    }
+    @Override
+    public String toString() {
+        String s="Metoda de plata este:";
+        return s;
     }
 }
 

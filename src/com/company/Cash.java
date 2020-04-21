@@ -1,6 +1,6 @@
 package com.company;
 
-class Cash extends MetodaPlata {
+class Cash extends MetodaPlata{
     private double Pret;
     String Nume = "A Platit Cash";
 
@@ -14,5 +14,6 @@ class Cash extends MetodaPlata {
         super.Show();
         System.out.println("Cash");
     }
+
 
 }

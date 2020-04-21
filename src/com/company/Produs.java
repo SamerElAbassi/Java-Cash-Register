@@ -1,6 +1,6 @@
 package com.company;
 
-public class Produs implements Comparable<Produs> {
+public class Produs implements Comparable<Produs>, CsvSerializable {
     private String Nume;
     private double Pret;
     private int Cantitate = 1;
@@ -52,6 +52,28 @@ public class Produs implements Comparable<Produs> {
             return -1;
         return 0;
     }
+
+    @Override
+    public String toString() {
+        String s="Nume=" + this.Nume + "------>" + this.Pret + "Lei";
+        return s;
+    }
+    @Override
+    public String[] toStringArray() {
+        return new String[]{Nume,Double.toString(Pret)};
+    }
+
+    @Override
+    public void fromStringArray(String[] data) {
+        Nume=data[0];
+        Pret=Double.parseDouble(data[1]);
+    }
+
+    @Override
+    public String[] getColumnNames() {
+        return new String[]{"Nume","Pret"};
+    }
+
 }
 
 

@@ -1,10 +1,10 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.*;
-import java.lang.Math;
 
 public class Servicii {
     static int Nr_bonuri = 0;
@@ -42,6 +42,92 @@ public class Servicii {
 
     List<Bon> Bonuri = new ArrayList<>();
     Bon BonParticular = new Bon();
+    String allFiles[] = {"src/com/baza_date/Produs.csv", "src/com/baza_date/FructeLegume.csv",
+            "src/com/baza_date/Card.csv", "src/com/baza_date/TicheteMasa.csv"};
+
+    void Citiri() {
+        for (String filePath : allFiles) {
+            try {
+                FileReader file = new FileReader(filePath);
+                BufferedReader reader = new BufferedReader(file);
+                if (filePath.equalsIgnoreCase("src/com/baza_date/Produs.csv")) {
+                    System.out.println("---------------------");
+                    System.out.println("Deschidem Produs.csv:");
+                    System.out.println("---------------------");
+
+                    var obiect = new Produs();
+                    CsvReader Reader = new CsvReader(reader, obiect);
+                    while (Reader.hasMoreObjects()) {
+                        Reader.readObject(obiect);
+                        System.out.println(obiect);
+                    }
+                }
+                if (filePath.equalsIgnoreCase("src/com/baza_date/FructeLegume.csv")) {
+                    System.out.println("---------------------");
+                    System.out.println("Deschidem FructeLegume.csv");
+                    var obiect = new FructeLegume();
+                    System.out.println("---------------------");
+
+                    CsvReader Reader = new CsvReader(reader, obiect);
+                    while (Reader.hasMoreObjects()) {
+                        Reader.readObject(obiect);
+                        System.out.println(obiect);
+                    }
+                }
+                if (filePath.equalsIgnoreCase("src/com/baza_date/Card.csv")) {
+                    System.out.println("---------------------");
+                    System.out.println("Deschidem Card.csv");
+                    System.out.println("---------------------");
+
+                    var obiect = new Card();
+                    CsvReader Reader = new CsvReader(reader, obiect);
+                    while (Reader.hasMoreObjects()) {
+                        Reader.readObject(obiect);
+                        System.out.println(obiect);
+                    }
+                }
+                if (filePath.equalsIgnoreCase("src/com/baza_date/TicheteMasa.csv")) {
+                    System.out.println("---------------------");
+
+                    System.out.println("Deschidem TicheteMasa.csv");
+                    System.out.println("---------------------");
+
+                    var obiect = new TicheteMasa();
+                    CsvReader Reader = new CsvReader(reader, obiect);
+                    while (Reader.hasMoreObjects()) {
+                        Reader.readObject(obiect);
+                        System.out.println(obiect);
+                    }
+                }
+                reader.close();
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+    }
+
+    void Scrieri() {
+        try {
+            String filePath = "src/com/baza_date/Produs1.csv";
+            FileWriter file = new FileWriter(filePath,true);
+            BufferedWriter writer = new BufferedWriter(file);
+            {
+                System.out.println("---------------------");
+                System.out.println("Scriem in Produs1.csv");
+                System.out.println("---------------------");
+
+                var obiect = new Produs("Mango", 50);
+                CsvWriter Writer = new CsvWriter(writer, obiect);
+                Writer.writeObject(obiect);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 
     void AddFruitLegume() throws InvalidDataException {
         int id;
