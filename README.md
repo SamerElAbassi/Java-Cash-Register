@@ -1,4 +1,3 @@
------------NOT DONE, trimit maine versiunea finala-----------
 
 
 # Casa de marcat
