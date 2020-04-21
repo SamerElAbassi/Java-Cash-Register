@@ -23,9 +23,12 @@ public class CsvReader<T extends CsvSerializable> {
         return reader.ready();
     }
 
-    public void readObject(T object) throws IOException {
+    public T readObject(T object) throws IOException {
         String line = reader.readLine();
         String[] values = line.split(",");
         object.fromStringArray(values);
+        System.out.println(object);
+        return object;
+
     }
 }

@@ -1,30 +1,41 @@
 package com.company;
 
+
+import java.util.Scanner;
+
 //Caserie magazin cu baza de date.
 //Primele 6 comenzi sunt pentru administrator, daca doreste sa aduca produse noi in magazin, sa verifice bonurile, sa caute etc
 //De la 7-12 sunt pentru client
 public class Main {
+    public static <T> T castObject(Class<T> clazz, Object object) {
+        return (T) object;
+    }
 
     public static void main(String[] args) {
         int choice;
         boolean check;
-
-
+        String allFiles[] = {"src/com/baza_date/Produs.csv", "src/com/baza_date/FructeLegume.csv",
+                "src/com/baza_date/Card.csv", "src/com/baza_date/TicheteMasa.csv"};
         Servicii Service = new Servicii();
-        Service.Citiri();
-        Service.Scrieri();
-        /*
+        for (String filePath : allFiles) {
+            Service.Citiri(filePath);
+        }
         System.out.println("---------------LISTA DE PRODUSE IN MAGAZIN--------------\n----------Lista Legume/Fructe din taraba---------\n");
-        Service.ShowHashFruitLegume();
+        Service.ShowListFruitLegume();
         System.out.println("---------------LISTA NON-LEGUME-FRUCTE-------------\n");
         Service.ShowListOtherProducts();
         System.out.println("Alege o optiune:");
         Scanner in = new Scanner(System.in);
-
+        Logger logger = new Logger();
         Service.MainMenu();
         choice = 0;
         while (choice != 12) {
             choice = in.nextInt();
+            try {
+                logger.Update(choice);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
             switch (choice) {
                 case 1:
                     check = false;
@@ -108,7 +119,7 @@ public class Main {
             }
         }
 
-       */
+
     }
 
 

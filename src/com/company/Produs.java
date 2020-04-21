@@ -14,33 +14,33 @@ public class Produs implements Comparable<Produs>, CsvSerializable {
     }
 
     public String GetNume() {
-        return this.Nume;
+        return Nume;
     }
 
     double GetPret() {
-        return this.Pret;
+        return Pret;
     }
 
-    public void SetNume(String Nume){this.Nume=Nume;}
+    public void SetNume(String Nume){Nume=Nume;}
 
     public void SetCantitate(int Cantitate) {
-        this.Cantitate = Cantitate;
+        Cantitate = Cantitate;
     }
 
     void SetPret(double Pret) {
-        this.Pret = Pret;
+        Pret = Pret;
     }
 
     int GetCantinate() {
-        return this.Cantitate;
+        return Cantitate;
     }
 
     public void Show() {
-        System.out.println("Nume=" + this.Nume + "------>" + this.Pret + "Lei" + " Cantinatea este:" + this.Cantitate);
+        System.out.println("Nume=" + Nume + "------>" + Pret + "Lei" + " Cantinatea este:" + Cantitate);
     }
 
     public void Show1() {
-        System.out.print("Nume=" + this.Nume + "------>" + this.Pret + "Lei" + "\r");
+        System.out.print("Nume=" + Nume + "------>" + Pret + "Lei" + "\r");
     }
 
 
@@ -55,7 +55,7 @@ public class Produs implements Comparable<Produs>, CsvSerializable {
 
     @Override
     public String toString() {
-        String s="Nume=" + this.Nume + "------>" + this.Pret + "Lei";
+        String s="Nume=" + Nume + "------>" + Pret + "Lei";
         return s;
     }
     @Override

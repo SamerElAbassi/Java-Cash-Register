@@ -3,13 +3,12 @@ package com.company;
 class Card extends MetodaPlata implements CsvSerializable {
     private String Nume;
     private Double Pret;
-
     Card(Double Pret, String Nume) {
         super(Pret);
         this.Nume = Nume;
         SetName(Nume);
     }
-    Card(){}
+    public Card(){}
 
     @Override
     public void Show() {

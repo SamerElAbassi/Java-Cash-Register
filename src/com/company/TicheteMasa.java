@@ -3,14 +3,13 @@ package com.company;
 class TicheteMasa extends MetodaPlata implements CsvSerializable{
     String Nume, CNP;
     Double Pret;
-
+    public TicheteMasa(){}
     TicheteMasa(Double Pret, String Nume, String CNP) {
         super(Pret);
         SetName(Nume);
         this.Nume = Nume;
         this.CNP = CNP;
     }
-    TicheteMasa(){}
     @Override
     public void Show() {
         super.Show();

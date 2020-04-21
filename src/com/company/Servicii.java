@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.lang.reflect.Constructor;
 import java.util.*;
 
 public class Servicii {
@@ -11,32 +12,19 @@ public class Servicii {
     List<FructeLegume> ListFructeLegume = new ArrayList<>();
 
     {
-        ListFructeLegume.add(new FructeLegume("Avocado", 50));
-        ListFructeLegume.add(new FructeLegume("Portocale", 20));
-        ListFructeLegume.add(new FructeLegume("Mere", 70));
-        ListFructeLegume.add(new FructeLegume("Rosii", 25));
-
     }
 
+    List<Card> ListCard = new ArrayList<>();
+    List<TicheteMasa> ListTichete = new ArrayList<>();
     int cantitate, Id, x;
     Map<Integer, FructeLegume> HashLegFructe = new HashMap();
 
     {
-        HashLegFructe.put(1, ListFructeLegume.get(0));
-        HashLegFructe.put(2, ListFructeLegume.get(1));
-        HashLegFructe.put(3, ListFructeLegume.get(2));
-        HashLegFructe.put(4, ListFructeLegume.get(3));
-
-
     }
 
     List<Produs> ListOtherProducts = new ArrayList<>();
 
     {
-        ListOtherProducts.add(new Produs("Detergent", 20));
-        ListOtherProducts.add(new Produs("Spirt", 40));
-        ListOtherProducts.add(new Produs("Apa", 5));
-        ListOtherProducts.add(new Produs("Hartie", 15));
 
     }
 
@@ -45,87 +33,105 @@ public class Servicii {
     String allFiles[] = {"src/com/baza_date/Produs.csv", "src/com/baza_date/FructeLegume.csv",
             "src/com/baza_date/Card.csv", "src/com/baza_date/TicheteMasa.csv"};
 
-    void Citiri() {
-        for (String filePath : allFiles) {
-            try {
-                FileReader file = new FileReader(filePath);
-                BufferedReader reader = new BufferedReader(file);
-                if (filePath.equalsIgnoreCase("src/com/baza_date/Produs.csv")) {
-                    System.out.println("---------------------");
-                    System.out.println("Deschidem Produs.csv:");
-                    System.out.println("---------------------");
-
-                    var obiect = new Produs();
-                    CsvReader Reader = new CsvReader(reader, obiect);
+    void Citiri(String filePath) {
+        try {
+            FileReader file = new FileReader(filePath);
+            BufferedReader reader = new BufferedReader(file);
+            String simpleClassName = filePath.substring(18, filePath.length() - 4);
+            String className = "com.company." + simpleClassName;
+            Class<?> clazz = Class.forName(className);
+            Constructor<?> ctor = clazz.getConstructor();
+            System.out.println("-------------SE DESCHIDE---------" + simpleClassName + ".csv");
+            Object object = ctor.newInstance(new Object[]{});
+            CsvReader Reader;
+            ////N-a mers castu de niciun fel
+            switch (simpleClassName) {
+                case "Produs":
+                    Reader = new CsvReader(reader, (Produs) (object));
                     while (Reader.hasMoreObjects()) {
-                        Reader.readObject(obiect);
-                        System.out.println(obiect);
+                        ListOtherProducts.add((Produs) Reader.readObject((Produs) object));
+                        object = ctor.newInstance(new Object[]{});
                     }
-                }
-                if (filePath.equalsIgnoreCase("src/com/baza_date/FructeLegume.csv")) {
-                    System.out.println("---------------------");
-                    System.out.println("Deschidem FructeLegume.csv");
-                    var obiect = new FructeLegume();
-                    System.out.println("---------------------");
 
-                    CsvReader Reader = new CsvReader(reader, obiect);
+                    break;
+                case "FructeLegume":
+                    Reader = new CsvReader(reader, (FructeLegume) object);
                     while (Reader.hasMoreObjects()) {
-                        Reader.readObject(obiect);
-                        System.out.println(obiect);
-                    }
-                }
-                if (filePath.equalsIgnoreCase("src/com/baza_date/Card.csv")) {
-                    System.out.println("---------------------");
-                    System.out.println("Deschidem Card.csv");
-                    System.out.println("---------------------");
+                        {
+                            ;
+                            ListFructeLegume.add((FructeLegume) Reader.readObject((FructeLegume) object));
+                            int index = ListFructeLegume.size() - 1;
+                            FructeLegume p = ListFructeLegume.get(index);
 
-                    var obiect = new Card();
-                    CsvReader Reader = new CsvReader(reader, obiect);
+                            //TODO: nu pune fructul in hash, desi il afiseaza
+                            //
+                            //System.out.println(p);
+                            HashLegFructe.put(index, p);
+                            object = ctor.newInstance(new Object[]{});
+                        }
+                    }
+                    break;
+                case "Card":
+                    Reader = new CsvReader(reader, (Card) (object));
                     while (Reader.hasMoreObjects()) {
-                        Reader.readObject(obiect);
-                        System.out.println(obiect);
+                        {
+                            ListCard.add((Card) Reader.readObject((Card) object));
+                            object = ctor.newInstance(new Object[]{});
+                        }
                     }
-                }
-                if (filePath.equalsIgnoreCase("src/com/baza_date/TicheteMasa.csv")) {
-                    System.out.println("---------------------");
-
-                    System.out.println("Deschidem TicheteMasa.csv");
-                    System.out.println("---------------------");
-
-                    var obiect = new TicheteMasa();
-                    CsvReader Reader = new CsvReader(reader, obiect);
+                    break;
+                case "TicheteMasa":
+                    Reader = new CsvReader(reader, (TicheteMasa) (object));
                     while (Reader.hasMoreObjects()) {
-                        Reader.readObject(obiect);
-                        System.out.println(obiect);
+                        ListTichete.add((TicheteMasa) Reader.readObject((TicheteMasa) object));
+                        object = ctor.newInstance(new Object[]{});
                     }
-                }
-                reader.close();
-
-            } catch (Exception e) {
-                System.out.println(e);
+                    break;
             }
+            reader.close();
+            file.close();
+        } catch (Exception e) {
+            System.out.println(e);
         }
 
     }
 
-    void Scrieri() {
-        try {
-            String filePath = "src/com/baza_date/Produs1.csv";
-            FileWriter file = new FileWriter(filePath,true);
-            BufferedWriter writer = new BufferedWriter(file);
-            {
-                System.out.println("---------------------");
-                System.out.println("Scriem in Produs1.csv");
-                System.out.println("---------------------");
 
-                var obiect = new Produs("Mango", 50);
-                CsvWriter Writer = new CsvWriter(writer, obiect);
-                Writer.writeObject(obiect);
+    void Scrieri(String filePath, Object object) {
+        try {
+            FileWriter file = new FileWriter(filePath, true);
+            BufferedWriter writer = new BufferedWriter(file);
+            String simpleClassName = filePath.substring(18, filePath.length() - 4);
+            String className = "com.company." + simpleClassName;
+            Class<?> clazz = Class.forName(className);
+            Constructor<?> ctor = clazz.getConstructor();
+            object = ctor.newInstance(new Object[]{});
+            CsvWriter Writer;
+            ////N-a mers cast cu <T> de niciun fel de niciun fel
+            switch (simpleClassName) {
+                case "Produs":
+                    Writer = new CsvWriter(writer, (Produs) (object));
+                    Writer.writeObject((Produs) object);
+                    break;
+                case "FructeLegume":
+                    Writer = new CsvWriter(writer, (Produs) (object));
+                    Writer.writeObject((FructeLegume) object);
+                    break;
+                case "Card":
+                    Writer = new CsvWriter(writer, (Produs) (object));
+                    Writer.writeObject((Card) object);
+                    break;
+                case "TicheteMasa":
+                    Writer = new CsvWriter(writer, (Produs) (object));
+                    Writer.writeObject((TicheteMasa) object);
 
             }
+            writer.close();
+            file.close();
         } catch (Exception e) {
             System.out.println(e);
         }
+
     }
 
 
@@ -190,14 +196,13 @@ public class Servicii {
 
     protected void ShowListFruitLegume() {
         for (FructeLegume element : ListFructeLegume)
-            element.Show1();
+            System.out.println(element);
         MainMenu();
     }
 
     protected void ShowListOtherProducts() {
         for (Produs element : ListOtherProducts) {
-            element.Show1();
-            System.out.println("\n");
+            System.out.println(element);
         }
 
     }
@@ -227,6 +232,10 @@ public class Servicii {
             throw new InvalidDataException("Nu exista clientul cu acest nume!");
         }
         MainMenu();
+    }
+
+    public <T> T castObject(Class<T> clazz, Object object) {
+        return (T) object;
     }
 
     void RichClients() throws InvalidDataException {
