@@ -1,9 +1,6 @@
 package com.company;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.lang.reflect.Constructor;
 import java.util.*;
 
@@ -39,12 +36,23 @@ public class Servicii {
             BufferedReader reader = new BufferedReader(file);
             String simpleClassName = filePath.substring(18, filePath.length() - 4);
             String className = "com.company." + simpleClassName;
+
+            System.out.println("-------------SE DESCHIDE---------" + simpleClassName + ".csv");
+
             Class<?> clazz = Class.forName(className);
             Constructor<?> ctor = clazz.getConstructor();
-            System.out.println("-------------SE DESCHIDE---------" + simpleClassName + ".csv");
             Object object = ctor.newInstance(new Object[]{});
-            CsvReader Reader;
+            var v=object.getClass().cast(object);
+            System.out.println(v.getClass());
+
+            CsvReader Reader=new CsvReader(reader,(CsvSerializable)object);
+            while (Reader.hasMoreObjects())
+            {   v= Reader.readObject((CsvSerializable)v);
+                System.out.println(v);
+
+            }
             ////N-a mers castu de niciun fel
+            /*
             switch (simpleClassName) {
                 case "Produs":
                     Reader = new CsvReader(reader, (Produs) (object));
@@ -90,6 +98,8 @@ public class Servicii {
             }
             reader.close();
             file.close();
+
+             */
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -108,7 +118,7 @@ public class Servicii {
             object = ctor.newInstance(new Object[]{});
             CsvWriter Writer;
             ////N-a mers cast cu <T> de niciun fel de niciun fel
-            switch (simpleClassName) {
+            /*switch (simpleClassName) {
                 case "Produs":
                     Writer = new CsvWriter(writer, (Produs) (object));
                     Writer.writeObject((Produs) object);
@@ -127,7 +137,7 @@ public class Servicii {
 
             }
             writer.close();
-            file.close();
+            file.close();*/
         } catch (Exception e) {
             System.out.println(e);
         }

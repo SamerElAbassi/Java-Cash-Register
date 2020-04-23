@@ -27,7 +27,6 @@ public class CsvReader<T extends CsvSerializable> {
         String line = reader.readLine();
         String[] values = line.split(",");
         object.fromStringArray(values);
-        System.out.println(object);
         return object;
 
     }
