@@ -5,13 +5,7 @@ import java.io.IOException;
 public class CsvWriter<T extends CsvSerializable> {
     private BufferedWriter writer;
 
-    /**
-     * Constructs a new CSV file writer.
-     *
-     * @param writer destination of CSV file
-     * @param object if not null, will be used to extract the column headers
-     * @throws IOException if there was any error with writing the object to file
-     */
+
     public CsvWriter(BufferedWriter writer, T object) throws IOException {
         this.writer = writer;
 

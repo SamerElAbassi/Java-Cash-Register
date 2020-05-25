@@ -42,12 +42,12 @@ public class Servicii {
             Class<?> clazz = Class.forName(className);
             Constructor<?> ctor = clazz.getConstructor();
             Object object = ctor.newInstance(new Object[]{});
-            var v=object.getClass().cast(object);
-            System.out.println(v.getClass());
+            var v = object.getClass().cast(object);
 
-            CsvReader Reader=new CsvReader(reader,(CsvSerializable)object);
-            while (Reader.hasMoreObjects())
-            {   v= Reader.readObject((CsvSerializable)v);
+
+            CsvReader Reader = new CsvReader(reader, (CsvSerializable) object);
+            while (Reader.hasMoreObjects()) {
+                v = Reader.readObject((CsvSerializable) v);
                 System.out.println(v);
 
             }
@@ -71,7 +71,7 @@ public class Servicii {
                             int index = ListFructeLegume.size() - 1;
                             FructeLegume p = ListFructeLegume.get(index);
 
-                            //TODO: nu pune fructul in hash, desi il afiseaza
+                            //
                             //
                             //System.out.println(p);
                             HashLegFructe.put(index, p);
@@ -244,9 +244,6 @@ public class Servicii {
         MainMenu();
     }
 
-    public <T> T castObject(Class<T> clazz, Object object) {
-        return (T) object;
-    }
 
     void RichClients() throws InvalidDataException {
         double x;

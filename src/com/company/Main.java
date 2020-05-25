@@ -29,6 +29,7 @@ public class Main {
         Logger logger = new Logger();
         Service.MainMenu();
         choice = 0;
+
         while (choice != 12) {
             choice = in.nextInt();
             try {
