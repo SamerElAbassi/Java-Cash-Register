@@ -1,50 +1,56 @@
 package com.company;
 
-class Vegetal extends Aliment implements CsvSerializable {
-    double Gramaj, Cantinate;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Vegetal extends Aliment {
     String name;
     Double price;
-    static int id = 0;
-
+    int id;
+    int quantity;
     public Vegetal() {
-        this.id++;
     }
 
-    Vegetal(String name, double price) {
-        super(name, price);
-        id++
-        this.id = id
-
+    public Vegetal(int id,String name, double price) {
+        super(id,name,price);
+        this.id=id;
     }
 
     public int getId() {
         return this.id;
     }
-
-    public String getName()
+    public void setId(int id){
+        this.id=id;
+    }
 
     @Override
     public String toString() {
-        String s = "name=" + name + "------>" + price + "Lei" + "/Kg";
+        String s ="ID="+this.getId()+" Name="+this.getName() + "------>" + this.getPrice()+ "Lei" + "/Kg";
         return s;
     }
+    public Vegetal read(){
+        System.out.println("Write vegetal name:");
+        Scanner in = new Scanner(System.in);
+        name = in.nextLine();
+        try {
+            System.out.println("Write price and id:");
+            price = in.nextDouble();
+            id=in.nextInt();
 
-    @Override
-    public String[] toStringArray() {
-        return new String[]{name, Double.toString(price)};
+            return new Vegetal(id,name,price);
+        } catch (InputMismatchException e) {
+            System.err.println("You didn't type a number!");
+        }
+        return new Vegetal();
+    }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+        this.setPrice(this.quantity*this.getPrice());
+    }
+    public int getQuantity(){
+        return this.quantity;
     }
 
-    @Override
-    public void fromStringArray(String[] data) {
-        //Key=Integer.parseInt(data[0]);
-        name = data[0];
-        price = Double.parseDouble(data[1]);
-    }
 
-    @Override
-    public String[] getColumnNames() {
-        //return new String[]{"Id","name","price"};
-        return new String[]{"name", "price"};
-    }
 
 }

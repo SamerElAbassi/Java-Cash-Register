@@ -1,4 +1,4 @@
-package com.company
+package com.company;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,22 +10,23 @@ import java.util.Scanner;
 
 public class databaseConnection {
 
+
     private static databaseConnection instance;
 
     private final String url = "jdbc:mysql://localhost:3306/magazin?createdatabaseIfNotExist=true";
     private final String username = "root";
-    private final String password = "kakaci321";
+    private final String password = "password";
 
     private final Connection connection;
 
-    private databaseConnection() throws SQLException {
+    public databaseConnection() throws SQLException {
         this.connection = DriverManager.getConnection(url, username, password);
     }
 
     public static databaseConnection getInstance() throws SQLException {
         if (instance == null) {
+            System.out.println("Intrat");
             instance = new databaseConnection();
-            createTables(instance.getConnection());
         }
 
         if (instance.getConnection().isClosed()) {
@@ -52,13 +53,14 @@ public class databaseConnection {
 
                 try (Statement currentStatement = connection.createStatement()) {
                     currentStatement.execute(rawStatement);
-                    System.out.println("Operatie executata cu succes!");
+                    System.out.println("Task succesfully executed!");
                 } catch (SQLException e) {
-                    System.out.println("Operatia nu se poate executa: " + e.getMessage());
+                    System.out.println("Cannot execute task!" + e.getMessage());
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Nu s-a putut incarca fisierul: 'tables.sql'!");
+            System.out.println("Couldn't load folder!");
         }
     }
+
 }

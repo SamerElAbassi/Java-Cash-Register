@@ -1,40 +1,47 @@
 package com.company;
 
-public class Aliment implements Comparable<Aliment>, CsvSerializable {
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Aliment implements Comparable<Aliment> {
     private String name;
     private double price;
-    private int quantity = 1;
+    private int id;
 
     public Aliment() {
     }
 
-    public Aliment(String name, double price) {
+    public Aliment(int id, String name, double price) {
+        this.id = id;
         this.name = name;
         this.price = price;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
-    double getPrice() {
-        return price;
+    public double getPrice() {
+        return this.price;
     }
 
-    int getQuantity() {
-        return quantity;
+
+    public int getId() {
+        return this.id;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    void setPrice(double price) {
-        this.price = price;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -48,24 +55,22 @@ public class Aliment implements Comparable<Aliment>, CsvSerializable {
 
     @Override
     public String toString() {
-        String s = "name=" + name + "------>" + price + "Lei";
+        String s = "ID="+this.getId()+" Name="+this.getName() + "------>" + this.getPrice() + "Lei";
         return s;
     }
-
-    @Override
-    public String[] toStringArray() {
-        return new String[]{name, Double.toString(price)};
-    }
-
-    @Override
-    public void fromStringArray(String[] data) {
-        name = data[0];
-        price = Double.parseDouble(data[1]);
-    }
-
-    @Override
-    public String[] getColumnNames() {
-        return new String[]{"name", "price"};
+    public Aliment read(){
+        System.out.println("Write aliment name:");
+        Scanner in = new Scanner(System.in);
+        name = in.nextLine();
+        try {
+            System.out.println("Write price and id:");
+            price = in.nextDouble();
+            id=in.nextInt();
+            return new Vegetal(id,name,price);
+        } catch (InputMismatchException e) {
+            System.err.println("You didn't type a number!");
+        }
+        return new Vegetal();
     }
 
 }
