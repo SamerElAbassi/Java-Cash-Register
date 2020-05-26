@@ -1,12 +1,12 @@
 package com.company;
 
-class Cash extends MetodaPlata{
-    private double Pret;
-    String Nume = "A Platit Cash";
+class Cash extends paymentMethod{
+    private double price;
+    String name = "A Platit Cash";
 
-    Cash(double Pret) {
-        super(Pret);
-        this.SetName(Nume);
+    Cash(double price) {
+        super(price);
+        this.SetName(name);
     }
 
     @Override

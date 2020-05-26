@@ -1,25 +1,25 @@
 package com.company;
 
-public class MetodaPlata {
-    private double Pret;
+public class paymentMethod {
+    private double price;
     private String CNP;
-    private String Nume;
-    MetodaPlata(){}
+    private String name;
+    paymentMethod(){}
 
-    void SetName(String Nume) {
-        this.Nume = Nume;
+    void SetName(String name) {
+        this.name = name;
     }
 
-    MetodaPlata(double Pret) {
-        this.Pret = Pret;
+    paymentMethod(double price) {
+        this.price = price;
     }
 
     protected void Show() {
         System.out.println("Metoda de plata este:");
     }
 
-    public String GetName() {
-        return this.Nume;
+    public String getName() {
+        return this.name;
     }
     @Override
     public String toString() {

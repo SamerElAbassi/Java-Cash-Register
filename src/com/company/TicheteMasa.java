@@ -1,41 +1,41 @@
 package com.company;
 
-class TicheteMasa extends MetodaPlata implements CsvSerializable{
-    String Nume, CNP;
-    Double Pret;
+class TicheteMasa extends paymentMethod implements CsvSerializable{
+    String name, CNP;
+    Double price;
     public TicheteMasa(){}
-    TicheteMasa(Double Pret, String Nume, String CNP) {
-        super(Pret);
-        SetName(Nume);
-        this.Nume = Nume;
+    TicheteMasa(Double price, String name, String CNP) {
+        super(price);
+        SetName(name);
+        this.name = name;
         this.CNP = CNP;
     }
     @Override
     public void Show() {
         super.Show();
-        System.out.println("TicheteMasa.\nNumele este:" + this.Nume + "\nCnp-ul este:" + this.CNP);
+        System.out.println("TicheteMasa.\nnamele este:" + this.name + "\nCnp-ul este:" + this.CNP);
     }
 
     @Override
     public String toString() {
-        String s="Numele este:" + this.Nume + "\nCnp-ul este:" + this.CNP;
-        return s;
+
+        return "namele este:" + this.name + "\nCnp-ul este:" + this.CNP;
     }
 
     @Override
     public String[] toStringArray() {
-        return new String[]{Nume,Double.toString(Pret),CNP};
+        return new String[]{name,Double.toString(price),CNP};
     }
 
     @Override
     public void fromStringArray(String[] data) {
-        Nume=data[0];
-        Pret=Double.parseDouble(data[1]);
+        name=data[0];
+        price=Double.parseDouble(data[1]);
         CNP=data[2];
     }
 
     @Override
     public String[] getColumnNames() {
-        return new String[]{"Nume","Pret","CNP"};
+        return new String[]{"name","price","CNP"};
     }
 }

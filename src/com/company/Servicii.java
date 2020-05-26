@@ -6,20 +6,19 @@ import java.util.*;
 
 public class Servicii {
     static int Nr_bonuri = 0;
-    List<FructeLegume> ListFructeLegume = new ArrayList<>();
+    List<Vegetal> ListFructeLegume = new ArrayList<>();
 
     {
     }
 
     List<Card> ListCard = new ArrayList<>();
     List<TicheteMasa> ListTichete = new ArrayList<>();
-    int cantitate, Id, x;
-    Map<Integer, FructeLegume> HashLegFructe = new HashMap();
+    int quantity, Id, x;
+    Map<Integer, Vegetal> HashLegFructe = new HashMap();
 
     {
     }
-
-    List<Produs> ListOtherProducts = new ArrayList<>();
+    List<Aliment> ListOtherProducts = new ArrayList<>();
 
     {
 
@@ -51,55 +50,6 @@ public class Servicii {
                 System.out.println(v);
 
             }
-            ////N-a mers castu de niciun fel
-            /*
-            switch (simpleClassName) {
-                case "Produs":
-                    Reader = new CsvReader(reader, (Produs) (object));
-                    while (Reader.hasMoreObjects()) {
-                        ListOtherProducts.add((Produs) Reader.readObject((Produs) object));
-                        object = ctor.newInstance(new Object[]{});
-                    }
-
-                    break;
-                case "FructeLegume":
-                    Reader = new CsvReader(reader, (FructeLegume) object);
-                    while (Reader.hasMoreObjects()) {
-                        {
-                            ;
-                            ListFructeLegume.add((FructeLegume) Reader.readObject((FructeLegume) object));
-                            int index = ListFructeLegume.size() - 1;
-                            FructeLegume p = ListFructeLegume.get(index);
-
-                            //
-                            //
-                            //System.out.println(p);
-                            HashLegFructe.put(index, p);
-                            object = ctor.newInstance(new Object[]{});
-                        }
-                    }
-                    break;
-                case "Card":
-                    Reader = new CsvReader(reader, (Card) (object));
-                    while (Reader.hasMoreObjects()) {
-                        {
-                            ListCard.add((Card) Reader.readObject((Card) object));
-                            object = ctor.newInstance(new Object[]{});
-                        }
-                    }
-                    break;
-                case "TicheteMasa":
-                    Reader = new CsvReader(reader, (TicheteMasa) (object));
-                    while (Reader.hasMoreObjects()) {
-                        ListTichete.add((TicheteMasa) Reader.readObject((TicheteMasa) object));
-                        object = ctor.newInstance(new Object[]{});
-                    }
-                    break;
-            }
-            reader.close();
-            file.close();
-
-             */
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -145,22 +95,20 @@ public class Servicii {
     }
 
 
-    void AddFruitLegume() throws InvalidDataException {
+    void AddFruitLegume() throws InvaliddataException {
         int id;
-        String Nume;
-        double Pret;
-        //Citire3
-
-        System.out.println("Scrie numele");
+        String name;
+        double price;
+        System.out.println("Scrie namele");
         Scanner in = new Scanner(System.in);
-        Nume = in.nextLine();
-        for (FructeLegume element : ListFructeLegume)
-            if (element.GetNume().equalsIgnoreCase(Nume))
-                throw new InvalidDataException("Exista deja produsul!");
-        System.out.print("Scrie pretul/kg");
+        name = in.nextLine();
+        for (Vegetal element : ListFructeLegume)
+            if (element.Getname().equalsIgnoreCase(name))
+                throw new InvaliddataException("Exista deja produsul!");
+        System.out.print("Scrie priceul/kg");
         try {
-            Pret = in.nextDouble();
-            FructeLegume Fruct = new FructeLegume(Nume, Pret);
+            price = in.nextDouble();
+            Vegetal Fruct = new Vegetal(name, price);
             id = Fruct.getKey();
             HashLegFructe.put(id, Fruct);
             ListFructeLegume.add(Fruct);
@@ -171,22 +119,22 @@ public class Servicii {
         MainMenu();
     }
 
-    void AddOtherProduct() throws InvalidDataException {
-        String Nume;
-        double Pret;
+    void AddOtherProduct() throws InvaliddataException {
+        String name;
+        double price;
         //Citire
 
-        System.out.println("Scrie numele produsului: ");
+        System.out.println("Scrie namele produsului: ");
         Scanner in = new Scanner(System.in);
-        Nume = in.nextLine();
-        System.out.println("Scrie Pretul produsului: ");
+        name = in.nextLine();
+        System.out.println("Scrie priceul produsului: ");
 
         try {
-            Pret = in.nextDouble();
-            Produs Product = new Produs(Nume, Pret);
-            for (Produs element : ListOtherProducts)
-                if (element.GetNume().equalsIgnoreCase(Nume))
-                    throw new InvalidDataException("Exista deja produsul!");
+            price = in.nextDouble();
+            Aliment Product = new Aliment(name, price);
+            for (Aliment element : ListOtherProducts)
+                if (element.Getname().equalsIgnoreCase(name))
+                    throw new InvaliddataException("Exista deja produsul!");
             ListOtherProducts.add(Product);
         } catch (InputMismatchException e) {
             System.err.println("Nu ai introdus un numar!");
@@ -198,20 +146,20 @@ public class Servicii {
     }
 
     protected void ShowHashFruitLegume() {
-        for (Map.Entry<Integer, FructeLegume> entry : HashLegFructe.entrySet()) {
-            System.out.println("Id leg/fructe:" + entry.getKey() + " Numele este:" + entry.getValue().GetNume() + " Pret=" + entry.getValue().GetPret() + "/kg");
+        for (Map.Entry<Integer, Vegetal> entry : HashLegFructe.entrySet()) {
+            System.out.println("Id leg/fructe:" + entry.getKey() + " namele este:" + entry.getValue().Getname() + " price=" + entry.getValue().getPrice() + "/kg");
             // do stuff
         }
     }
 
     protected void ShowListFruitLegume() {
-        for (FructeLegume element : ListFructeLegume)
+        for (Vegetal element : ListFructeLegume)
             System.out.println(element);
         MainMenu();
     }
 
     protected void ShowListOtherProducts() {
-        for (Produs element : ListOtherProducts) {
+        for (Aliment element : ListOtherProducts) {
             System.out.println(element);
         }
 
@@ -225,27 +173,27 @@ public class Servicii {
 
     }
 
-    void FindClient() throws InvalidDataException {
-        String Nume;
+    void FindClient() throws InvaliddataException {
+        String name;
         //Citire
 
-        System.out.println("Scrie numele");
+        System.out.println("Scrie namele");
         Scanner in = new Scanner(System.in);
-        Nume = in.nextLine();
+        name = in.nextLine();
         int OK = 0;
         for (Bon e : Bonuri)
-            if (e.GetName().equalsIgnoreCase(Nume)) {
+            if (e.getName().equalsIgnoreCase(name)) {
                 e.Show();
                 OK++;
             }
         if (OK == 0) {
-            throw new InvalidDataException("Nu exista clientul cu acest nume!");
+            throw new InvaliddataException("Nu exista clientul cu acest name!");
         }
         MainMenu();
     }
 
 
-    void RichClients() throws InvalidDataException {
+    void RichClients() throws InvaliddataException {
         double x;
         //Citire
         int ok1 = 0;
@@ -254,7 +202,7 @@ public class Servicii {
         try {
             x = in.nextInt();
             for (Bon element : Bonuri)
-                if (element.GetPret() > x) {
+                if (element.Getprice() > x) {
                     element.Show();
                     ok1 = 1;
                 }
@@ -263,19 +211,19 @@ public class Servicii {
         }
 
         if (ok1 == 0)
-            throw new InvalidDataException("Nu exista!");
+            throw new InvaliddataException("Nu exista!");
 
         MainMenu();
     }
 
-    void AddProductCos() throws InvalidDataException {
+    void AddProductCos() throws InvaliddataException {
         SecondMenu();
         Scanner in = new Scanner(System.in);
         int choice = 0;
         while (choice != 3) {
             choice = in.nextInt();
             if (choice > 3)
-                throw new InvalidDataException("Optiunea este intre 1-3!");
+                throw new InvaliddataException("Optiunea este intre 1-3!");
             switch (choice) {
                 case 1:
                     AddLegFruitCos();
@@ -290,7 +238,7 @@ public class Servicii {
         MainMenu();
     }
 
-    void AddLegFruitCos() throws InvalidDataException {
+    void AddLegFruitCos() throws InvaliddataException {
         ShowHashFruitLegume();
         Scanner in = new Scanner(System.in);
         System.out.println("Scrie Id-ul");
@@ -300,18 +248,18 @@ public class Servicii {
             System.err.println("Nu ai introdus un numar!");
         }
         if (!HashLegFructe.containsKey(Id))
-            throw new InvalidDataException("Id inexistent!");
-        for (Map.Entry<Integer, FructeLegume> entry : HashLegFructe.entrySet()) {
+            throw new InvaliddataException("Id inexistent!");
+        for (Map.Entry<Integer, Vegetal> entry : HashLegFructe.entrySet()) {
             if (entry.getKey() == Id) {
                 System.out.print("Scrie Gramajul (in kg)");
                 try {
-                    cantitate = in.nextInt();
+                    quantity = in.nextInt();
                 } catch (InputMismatchException e) {
                     System.err.println("Nu ai introdus un numar!");
                 }
-                for (FructeLegume element : ListFructeLegume)
-                    if (element.GetNume().equalsIgnoreCase(entry.getValue().GetNume())) {
-                        element.SetCantitate(cantitate);
+                for (Vegetal element : ListFructeLegume)
+                    if (element.Getname().equalsIgnoreCase(entry.getValue().Getname())) {
+                        element.setQuantity(quantity);
                         BonParticular.Add(element);
                     }
 
@@ -325,41 +273,41 @@ public class Servicii {
 
     }
 
-    void AddAltProductCos() throws InvalidDataException {
+    void AddAltProductCos() throws InvaliddataException {
         int ok = 0;
         ShowListOtherProducts();
         Scanner in = new Scanner(System.in);
-        System.out.println("Scrie Numele");
-        String Nume = in.nextLine();
-        for (Produs element : ListOtherProducts)
-            if (element.GetNume().equalsIgnoreCase(Nume)) {
+        System.out.println("Scrie namele");
+        String name = in.nextLine();
+        for (Aliment element : ListOtherProducts)
+            if (element.Getname().equalsIgnoreCase(name)) {
                 System.out.print("Scrie Cantinatea:");
                 try {
-                    cantitate = in.nextInt();
+                    quantity = in.nextInt();
                 } catch (InputMismatchException e) {
                     System.err.println("Nu ai introdus un numar!");
                 }
-                element.SetCantitate(cantitate);
+                element.setQuantity(quantity);
                 BonParticular.Add(element);
                 ok = 1;
             }
         if (ok == 0)
-            throw new InvalidDataException("Nu exista produsul cu acest nume!");
+            throw new InvaliddataException("Nu exista produsul cu acest name!");
 
         SecondMenu();
 
     }
 
     void PayCash() {
-        if (BonParticular.GetPret() == 0)
+        if (BonParticular.Getprice() == 0)
             System.out.println("Nu ai inca produse in cos!");
 
         else {
-            System.out.println("Pretul este:" + BonParticular.GetPret());
-            Cash Plata = new Cash(BonParticular.GetPret());
-            BonParticular.SetMetodaPlata(Plata);
+            System.out.println("priceul este:" + BonParticular.Getprice());
+            Cash Plata = new Cash(BonParticular.Getprice());
+            BonParticular.SetpaymentMethod(Plata);
             System.out.println("\nAchitat! Se elibereaza cosul!\n");
-            BonParticular.MetodaPlata = Plata;
+            BonParticular.paymentMethod = Plata;
             Bonuri.add(BonParticular);
             BonParticular = new Bon();
             Nr_bonuri++;
@@ -370,16 +318,16 @@ public class Servicii {
     }
 
     void PayCard() {
-        if (BonParticular.GetPret() == 0)
+        if (BonParticular.Getprice() == 0)
             System.out.println("Nu ai inca produse in cos!");
         else {
-            System.out.println("Pretul este " + BonParticular.GetPret());
-            System.out.println("Scrie numele:");
+            System.out.println("priceul este " + BonParticular.Getprice());
+            System.out.println("Scrie namele:");
             Scanner in = new Scanner(System.in);
-            String Nume = in.nextLine();
-            Card Plata = new Card(BonParticular.GetPret(), Nume);
+            String name = in.nextLine();
+            Card Plata = new Card(BonParticular.Getprice(), name);
             System.out.println("\nAchitat! Se elibereaza cosul!\n");
-            BonParticular.MetodaPlata = Plata;
+            BonParticular.paymentMethod = Plata;
             Bonuri.add(BonParticular);
             BonParticular = new Bon();
             Nr_bonuri++;
@@ -389,19 +337,19 @@ public class Servicii {
 
     }
 
-    void PayTichete() throws InvalidDataException {
-        if (BonParticular.GetPret() == 0)
+    void PayTichete() throws InvaliddataException {
+        if (BonParticular.Getprice() == 0)
             System.out.println("Nu ai inca produse in cos!");
         else {
-            System.out.println("Pretul este " + BonParticular.GetPret());
-            System.out.println("Scrie numele:");
+            System.out.println("priceul este " + BonParticular.Getprice());
+            System.out.println("Scrie namele:");
             Scanner in = new Scanner(System.in);
-            String Nume = in.nextLine();
+            String name = in.nextLine();
             System.out.println("Scrie CNP");
             String CNP = in.nextLine();
             if (CNP.length() != 12)
-                throw new InvalidDataException("CNP-ul nu are 13 cifre!");
-            BonParticular.MetodaPlata = new TicheteMasa(BonParticular.GetPret(), Nume, CNP);
+                throw new InvaliddataException("CNP-ul nu are 13 cifre!");
+            BonParticular.paymentMethod = new TicheteMasa(BonParticular.Getprice(), name, CNP);
 
             System.out.println("\nAchitat! Se elibereaza cosul!\n");
             Bonuri.add(BonParticular);
@@ -413,7 +361,7 @@ public class Servicii {
     }
 
     void SeeCos() {
-        for (Produs e : BonParticular.cos)
+        for (Aliment e : BonParticular.cos)
             e.Show();
         System.out.println("\n");
         MainMenu();
@@ -435,8 +383,8 @@ public class Servicii {
         System.out.println("\n1.Adauga legume/fructe in lista de produse(as admin)\n" +
                 "2.Adauga alt tip de produs in lista de produse(as admin)\n" +
                 "3.Vezi Bonurile\n" +
-                "4.Sorteaza produsele(fara id) dupa pret\n" +
-                "5.Cauta bonul unui client dupa nume\n" +
+                "4.Sorteaza produsele(fara id) dupa price\n" +
+                "5.Cauta bonul unui client dupa name\n" +
                 "6.Afiseaza clientii cu suma mai mare decat x\n" +
                 "7.Adauga un produs in cos\n" +
                 "8.Plateste Cash\n" +

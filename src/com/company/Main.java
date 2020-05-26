@@ -1,11 +1,5 @@
 package com.company;
-
-
 import java.util.Scanner;
-
-//Caserie magazin cu baza de date.
-//Primele 6 comenzi sunt pentru administrator, daca doreste sa aduca produse noi in magazin, sa verifice bonurile, sa caute etc
-//De la 7-12 sunt pentru client
 public class Main {
     public static <T> T castObject(Class<T> clazz, Object object) {
         return (T) object;
@@ -44,7 +38,7 @@ public class Main {
                         try {
                             Service.AddFruitLegume();
                             check = true;
-                        } catch (InvalidDataException e) {
+                        } catch (InvaliddataException e) {
                             System.out.println(e);
                         }
                     break;
@@ -54,7 +48,7 @@ public class Main {
                         try {
                             Service.AddOtherProduct();
                             check = true;
-                        } catch (InvalidDataException e) {
+                        } catch (InvaliddataException e) {
                             System.out.println(e);
                         }
                     break;
@@ -69,7 +63,7 @@ public class Main {
                     try {
                         Service.FindClient();
                         check = true;
-                    } catch (InvalidDataException e) {
+                    } catch (InvaliddataException e) {
                         System.out.println(e);
                         Service.MainMenu();
                     }
@@ -77,7 +71,7 @@ public class Main {
                 case 6:
                     try {
                         Service.RichClients();
-                    } catch (InvalidDataException e) {
+                    } catch (InvaliddataException e) {
                         System.out.println(e);
                         Service.MainMenu();
                     }
@@ -88,7 +82,7 @@ public class Main {
                         try {
                             Service.AddProductCos();
                             check = true;
-                        } catch (InvalidDataException e) {
+                        } catch (InvaliddataException e) {
                             System.out.println(e);
                         }
                     break;
@@ -104,7 +98,7 @@ public class Main {
                         try {
                             Service.PayTichete();
                             check = true;
-                        } catch (InvalidDataException e) {
+                        } catch (InvaliddataException e) {
                             System.out.println(e);
                         }
                     break;

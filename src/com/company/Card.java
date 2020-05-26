@@ -1,40 +1,40 @@
 package com.company;
 
-class Card extends MetodaPlata implements CsvSerializable {
-    private String Nume;
-    private Double Pret;
+class Card extends paymentMethod implements CsvSerializable {
+    private String name;
+    private Double price;
     public Card(){}
-    Card(Double Pret, String Nume) {
-        super(Pret);
-        this.Nume = Nume;
-        SetName(Nume);
+    Card(Double price, String name) {
+        super(price);
+        this.name = name;
+        SetName(name);
     }
 
     @Override
     public void Show() {
         super.Show();
-        System.out.println("Card.\nNumele este " + this.Nume);
+        System.out.println("Card.\nnamele este " + this.name);
     }
 
     @Override
     public String toString() {
-        String s="Numele este " + this.Nume;
+        String s="namele este " + this.name;
         return s;
     }
 
     @Override
     public String[] toStringArray() {
-        return new String[]{Nume,Double.toString(Pret)};
+        return new String[]{name,Double.toString(price)};
     }
 
     @Override
     public void fromStringArray(String[] data) {
-        Nume=data[0];
-        Pret=Double.parseDouble(data[1]);
+        name=data[0];
+        price=Double.parseDouble(data[1]);
     }
 
     @Override
     public String[] getColumnNames() {
-        return new String[]{"Nume","Pret"};
+        return new String[]{"name","price"};
     }
 }

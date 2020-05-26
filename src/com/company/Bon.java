@@ -5,69 +5,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bon {
-    LocalDateTime Data = LocalDateTime.now(); // Create a date object
-    double Pret;
-    MetodaPlata MetodaPlata;
+    LocalDateTime data = LocalDateTime.now(); // Create a date object
+    double price;
+    paymentMethod paymentMethod;
     static int id = 0;
-    int Cantitate;
-    List<Produs> cos = new ArrayList<>();
+    int quantity;
+    List<Aliment> cos = new ArrayList<>();
 
     Bon() {
     }
 
-    Bon(double Pret, MetodaPlata MetodaPlata) {
-        this.Pret = Pret;
-        this.MetodaPlata = MetodaPlata;
-        this.Data = Data;
+    Bon(double price, paymentMethod paymentMethod) {
+        this.price = price;
+        this.paymentMethod = paymentMethod;
+        this.data = data;
     }
 
-    void SetMetodaPlata(MetodaPlata MetodaPlata) {
-        this.MetodaPlata = MetodaPlata;
+    void SetpaymentMethod(paymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
-    public double GetPret() {
-        return this.Pret;
+    public double Getprice() {
+        return this.price;
     }
 
-    public void Add(Produs p) {
+    public void Add(Aliment p) {
         int OK = 0;
-        for (Produs element : cos) {
-            if (element.GetNume().equalsIgnoreCase(p.GetNume())) {
-                element.SetCantitate(element.GetCantinate() + 1);
+        for (Aliment element : cos) {
+            if (element.getName().equalsIgnoreCase(p.getName())) {
+                element.setQuantity(element.getQuantity() + 1);
                 OK++;
 
             }
         }
         if (OK == 0)
             cos.add(p);
-        this.Pret += p.GetPret() * p.GetCantinate();
+        this.price += p.getPrice() * p.getQuantity();
     }
 
-    public void Add(FructeLegume p) {
+    public void Add(Vegetal p) {
         int OK = 0;
-        for (Produs element : cos) {
-            if (element.GetNume().equalsIgnoreCase(p.GetNume())) {
-                element.SetCantitate(element.GetCantinate());
+        for (Aliment element : cos) {
+            if (element.Getname().equalsIgnoreCase(p.Getname())) {
+                element.setQuantity(element.getQuantity());
                 OK++;
 
             }
         }
         if (OK == 0)
             cos.add(p);
-        this.Pret += p.GetPret() * p.GetCantinate();
+        this.price += p.getPrice() * p.getQuantity();
     }
 
 
-    public String GetName() {
-        return this.MetodaPlata.GetName();
+    public String getName() {
+        return this.paymentMethod.getName();
     }
 
     public void Show() {
-        for (Produs element : cos) {
+        for (Aliment element : cos) {
             element.Show();
         }
-        System.out.println("\nPretul total este:" + this.Pret + ". Data este:" + this.Data);
-        this.MetodaPlata.Show();
+        System.out.println("\npriceul total este:" + this.price + ". data este:" + this.data);
+        this.paymentMethod.Show();
 
 
     }

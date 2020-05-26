@@ -1,7 +1,7 @@
 package com.company;
 
-public class InvalidDataException extends Exception {
-    public InvalidDataException(String cause) {
+public class InvaliddataException extends Exception {
+    public InvaliddataException(String cause) {
         super(cause);
     }
 }
