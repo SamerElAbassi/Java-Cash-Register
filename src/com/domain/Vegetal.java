@@ -1,4 +1,4 @@
-package com.company;
+package com.domain;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -25,8 +25,7 @@ public class Vegetal extends Aliment {
 
     @Override
     public String toString() {
-        String s ="ID="+this.getId()+" Name="+this.getName() + "------>" + this.getPrice()+ "Lei" + "/Kg";
-        return s;
+        return "ID="+this.getId()+" Name="+this.getName() + "------>" + this.getPrice()+ "Lei" + "/Kg";
     }
     public Vegetal read(){
         System.out.println("Write vegetal name:");

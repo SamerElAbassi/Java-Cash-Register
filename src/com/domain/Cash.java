@@ -1,4 +1,4 @@
-package com.company;
+package com.domain;
 
 public class Cash extends PaymentMethod{
     private double price;

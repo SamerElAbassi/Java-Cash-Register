@@ -1,4 +1,4 @@
-package com.company;
+package com.domain;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package com.company.Persistence;
+package com.Persistence;
 
 public interface GenericRepository <T> {
     T add(T entity);

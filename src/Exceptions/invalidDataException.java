@@ -1,4 +1,4 @@
-package com.company;
+package Exceptions;
 
 public class invalidDataException extends Exception {
     public invalidDataException(String cause) {

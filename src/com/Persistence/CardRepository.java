@@ -1,8 +1,7 @@
-package com.company.Persistence;
+package com.Persistence;
 
-import com.company.Card;
-import com.company.MealTicket;
-import com.company.databaseConnection;
+import com.domain.Card;
+import connection.databaseConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +25,7 @@ public class CardRepository implements GenericRepository<Card> {
             }
         } catch (SQLException e) {
             System.out.println("Card:" + e.getMessage());
-            return new com.company.Card();
+            return new com.domain.Card();
         }
         return card;
     }

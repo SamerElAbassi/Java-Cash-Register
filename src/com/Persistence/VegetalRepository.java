@@ -1,7 +1,7 @@
-package com.company.Persistence;
+package com.Persistence;
 
-import com.company.Vegetal;
-import com.company.databaseConnection;
+import com.domain.Vegetal;
+import connection.databaseConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +25,7 @@ public class VegetalRepository implements GenericRepository<Vegetal> {
             }
         } catch (SQLException e) {
             System.out.println("Vegetal:" + e.getMessage());
-            return new com.company.Vegetal();
+            return new com.domain.Vegetal();
         }
         return vegetal;
     }

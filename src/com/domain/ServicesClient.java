@@ -1,9 +1,13 @@
-package com.company;
+package com.domain;
 
-import com.company.Persistence.AlimentRepository;
-import com.company.Persistence.CardRepository;
-import com.company.Persistence.MealTicketRepository;
-import com.company.Persistence.VegetalRepository;
+import com.Persistence.AlimentRepository;
+import com.Persistence.CardRepository;
+import com.Persistence.MealTicketRepository;
+import com.Persistence.VegetalRepository;
+import com.domain.Card;
+import com.domain.Cash;
+import com.domain.MealTicket;
+import com.domain.Receipt;
 
 import java.util.*;
 

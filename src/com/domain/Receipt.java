@@ -1,4 +1,4 @@
-package com.company;
+package com.domain;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class Receipt {
         this.paymentMethod = paymentMethod;
         this.date = date;
     }
-    PaymentMethod getPaymentMethod(){
+    public PaymentMethod getPaymentMethod(){
         return this.paymentMethod;
     }
     void setPaymentMethod(PaymentMethod paymentMethod) {
@@ -45,7 +45,9 @@ public class Receipt {
     }
 
 
-
+    public List<Aliment> getCart(){
+        return this.cart;
+    }
     public void show() {
         for (Aliment aliment : cart) {
             System.out.println(aliment);

@@ -1,8 +1,7 @@
-package com.company.Persistence;
+package com.Persistence;
 
-import com.company.MealTicket;
-import com.company.Vegetal;
-import com.company.databaseConnection;
+import com.domain.MealTicket;
+import connection.databaseConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

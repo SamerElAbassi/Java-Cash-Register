@@ -1,9 +1,11 @@
-package com.company;
+package com.domain;
 
-import com.company.Persistence.AlimentRepository;
-import com.company.Persistence.CardRepository;
-import com.company.Persistence.MealTicketRepository;
-import com.company.Persistence.VegetalRepository;
+import com.Persistence.AlimentRepository;
+import com.Persistence.CardRepository;
+import com.Persistence.MealTicketRepository;
+import com.Persistence.VegetalRepository;
+import com.audit.Logger;
+import com.domain.*;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -13,15 +15,17 @@ public class ServicesAdmin {
     Scanner in = new Scanner(System.in);
     boolean found = false;
     int choice = 0;
+    Logger logger = new Logger();
     VegetalRepository vegetalRepository = new VegetalRepository();
     MealTicketRepository mealTicketRepository = new MealTicketRepository();
     CardRepository cardRepository = new CardRepository();
     AlimentRepository alimentRepository = new AlimentRepository();
 
     void findClient(ArrayList<Receipt> Receipts) {
+        logger.update("findClient");
         String name;
         System.out.println("Write name:");
-        name=in.nextLine();
+        name = in.nextLine();
         for (Receipt receipt : Receipts) {
             if (receipt.getPaymentMethod().getName().equalsIgnoreCase(name)) {
                 receipt.show();
@@ -35,6 +39,7 @@ public class ServicesAdmin {
 
 
     void clientsOverSum(ArrayList<Receipt> Receipts) {
+        logger.update("clientsOverSum");
         double sum = 0;
         found = false;
         System.out.println("Write minimum sum:");
@@ -85,11 +90,13 @@ public class ServicesAdmin {
             Vegetal vegetal = new Vegetal();
             vegetal.read();
             vegetalRepository.add(vegetal);
+            logger.update("vegetalRepositoryAdd");
         }
         if (choice == 2) {
             Aliment aliment = new Aliment();
             aliment.read();
             alimentRepository.add(aliment);
+            logger.update("alimentRepositoryAdd");
         }
         if (choice == 3)
             return;
@@ -110,41 +117,46 @@ public class ServicesAdmin {
             Vegetal vegetal = new Vegetal();
             vegetal.read();
             vegetalRepository.update(vegetal);
+            logger.update("vegetalRepositoryUpdate");
         }
         if (choice == 2) {
             Aliment aliment = new Aliment();
             aliment.read();
             alimentRepository.update(aliment);
+            logger.update("alimentRepositoryUpdate");
         }
         if (choice == 3) {
-            double price=0;
+            double price = 0;
             MealTicket mealTicket = new MealTicket();
             System.out.println("Enter price:");
-            try{
-                price=in.nextDouble();
-            }catch(Exception e){
+            try {
+                price = in.nextDouble();
+            } catch (Exception e) {
                 System.out.println(e);
             }
             mealTicket.read(price);
             mealTicketRepository.update(mealTicket);
+            logger.update("mealTicketRepositoryUpdate");
         }
         if (choice == 4) {
-            double price=0;
+            double price = 0;
             Card card = new Card();
             System.out.println("Enter price:");
-            try{
-                price=in.nextDouble();
-            }catch(Exception e){
+            try {
+                price = in.nextDouble();
+            } catch (Exception e) {
                 System.out.println(e);
             }
             card.read(price);
             cardRepository.update(card);
+            logger.update("cardRepositoryUpdate");
         }
         if (choice == 5)
-            return ;
+            return;
         if (choice > 5)
             System.out.println("Invalid choice!");
     }
+
     void deleteMenu() {
         System.out.println("1.Delete vegetal\n2.Delete non-vegetal\n3.Delete incorrect meal ticket payment\n4.Delete incorrect card payment");
         try {
@@ -156,35 +168,40 @@ public class ServicesAdmin {
             Vegetal vegetal = new Vegetal();
             vegetal.read();
             vegetalRepository.delete(vegetal);
+            logger.update("vegetalRepositoryDelete");
         }
         if (choice == 2) {
             Aliment aliment = new Aliment();
             aliment.read();
             alimentRepository.delete(aliment);
+            logger.update("alimentRepositoryDelete");
         }
         if (choice == 3) {
-            double price=0;
+            double price = 0;
             MealTicket mealTicket = new MealTicket();
             System.out.println("Enter price:");
-            try{
-                price=in.nextDouble();
-            }catch(Exception e){
+            try {
+                price = in.nextDouble();
+            } catch (Exception e) {
                 System.out.println(e);
             }
             mealTicket.read(price);
             mealTicketRepository.delete(mealTicket);
+            logger.update("mealTicketRepositoryDelete");
+
         }
         if (choice == 4) {
             Card card = new Card();
-            double price=0;
+            double price = 0;
             System.out.println("Enter price:");
-            try{
-                price=in.nextDouble();
-            }catch(Exception e){
+            try {
+                price = in.nextDouble();
+            } catch (Exception e) {
                 System.out.println(e);
             }
             card.read(price);
             cardRepository.delete(card);
+            logger.update("cardRepositoryDelete");
         }
         if (choice == 5)
             return;

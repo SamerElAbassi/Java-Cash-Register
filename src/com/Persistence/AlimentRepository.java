@@ -1,7 +1,6 @@
-package com.company.Persistence;
-import com.company.Aliment;
-import com.company.MealTicket;
-import com.company.databaseConnection;
+package com.Persistence;
+import com.domain.Aliment;
+import connection.databaseConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +25,7 @@ public class AlimentRepository implements GenericRepository<Aliment> {
             }
         } catch (SQLException e) {
             System.out.println("Aliment:" + e.getMessage());
-            return new com.company.Aliment();
+            return new com.domain.Aliment();
         }
         return aliment;
     }
